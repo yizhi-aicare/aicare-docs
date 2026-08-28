@@ -96,6 +96,42 @@ export default defineConfig({
     search: {
       provider: "local",
       options: {
+        miniSearch: {
+          options: {
+            // CJK-aware tokenizer: MiniSearch's default splits on
+            // space/punctuation, so a Chinese phrase like 转人工 becomes one
+            // opaque token and queries never match. Split CJK runs into
+            // unigrams + bigrams; keep latin/digit words as-is. The same
+            // function is used at index-build time (node) and query time
+            // (browser). VitePress serializes it with Function#toString and
+            // revives it via new Function, so it must be fully
+            // self-contained — no references to outer variables.
+            tokenize: (text: string) => {
+              const tokens: string[] = [];
+              const seen = new Set<string>();
+              const push = (token: string) => {
+                if (token && !seen.has(token)) {
+                  seen.add(token);
+                  tokens.push(token);
+                }
+              };
+              const pattern =
+                /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+|[0-9A-Za-z_$][0-9A-Za-z_$.\-]*/gu;
+              for (const match of text.matchAll(pattern)) {
+                const segment = match[0];
+                if (/^[0-9A-Za-z_$]/.test(segment)) {
+                  push(segment);
+                  continue;
+                }
+                for (let i = 0; i < segment.length; i++) {
+                  push(segment[i]);
+                  if (i + 1 < segment.length) push(segment.slice(i, i + 2));
+                }
+              }
+              return tokens;
+            }
+          }
+        },
         translations: {
           button: {
             buttonText: "搜索文档",
@@ -124,7 +160,11 @@ export default defineConfig({
       next: "下一篇"
     },
 
-    lastUpdatedText: "最后更新",
+    lastUpdated: {
+      text: "最后更新",
+      // zh-Hans medium date style renders as 2026年8月28日 (date only, no time)
+      formatOptions: { dateStyle: "medium", forceLocale: true }
+    },
     returnToTopLabel: "回到顶部",
     sidebarMenuLabel: "目录",
     darkModeSwitchLabel: "深色模式",

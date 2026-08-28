@@ -33,10 +33,21 @@
   --vp-button-brand-hover-bg: #4c33b8;
   --vp-button-brand-active-bg: #402b9d;
 
-  /* 自定义容器提示块 */
+  /* 侧边栏与页面同底色，靠右侧细线区分,不做左侧色块 */
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+
+  /* 自定义容器提示块:tip 用品牌紫,info 用中性墨色,warning 用收敛的琥珀 */
   --vp-custom-block-tip-border: transparent;
   --vp-custom-block-tip-bg: rgba(124, 92, 255, 0.08);
   --vp-custom-block-tip-text: #3d2f85;
+
+  --vp-custom-block-info-border: transparent;
+  --vp-custom-block-info-bg: rgba(36, 32, 58, 0.05);
+  --vp-custom-block-info-text: #45415c;
+
+  --vp-custom-block-warning-border: transparent;
+  --vp-custom-block-warning-bg: rgba(176, 122, 6, 0.09);
+  --vp-custom-block-warning-text: #7a5b13;
 
   /* 字体：系统栈，中文优先黑体族 */
   --vp-font-family-base:
@@ -50,21 +61,28 @@
   --vp-c-brand-3: #7c5cff;
   --vp-c-brand-soft: rgba(124, 92, 255, 0.18);
 
-  --vp-c-bg: #17141f;
-  --vp-c-bg-alt: #100e16;
-  --vp-c-bg-soft: #201c2b;
-  --vp-c-bg-elv: #201c2b;
+  /* 深色底整体提亮一档,避免侧边栏/正文形成漆黑色块 */
+  --vp-c-bg: #1d1a27;
+  --vp-c-bg-alt: #17141f;
+  --vp-c-bg-soft: #272334;
+  --vp-c-bg-elv: #272334;
 
   --vp-c-text-1: #ece9f4;
   --vp-c-text-2: #b5b0c6;
   --vp-c-text-3: #817c94;
 
-  --vp-c-divider: #2c2839;
-  --vp-c-border: #37324a;
-  --vp-c-gutter: #2c2839;
+  --vp-c-divider: #322d42;
+  --vp-c-border: #3d3752;
+  --vp-c-gutter: #322d42;
 
   --vp-custom-block-tip-bg: rgba(124, 92, 255, 0.14);
   --vp-custom-block-tip-text: #c9c0ff;
+
+  --vp-custom-block-info-bg: rgba(236, 233, 244, 0.06);
+  --vp-custom-block-info-text: #b5b0c6;
+
+  --vp-custom-block-warning-bg: rgba(224, 177, 87, 0.12);
+  --vp-custom-block-warning-text: #d9b878;
 }
 
 /* ---- 编辑排版细节 ---- */
@@ -93,11 +111,43 @@
   margin-top: 2rem;
 }
 
-/* 表格：细线风格 */
+/* 表格：细线风格；窄屏允许横向滚动，两侧渐隐阴影提示可滚 */
 .vp-doc table {
   border-collapse: collapse;
   width: 100%;
   display: table;
+}
+
+@media (max-width: 719px) {
+  .vp-doc table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Lea Verou 式滚动阴影：内容盖住底色层，滚到边缘时阴影消失 */
+    background:
+      linear-gradient(to right, var(--vp-c-bg), var(--vp-c-bg)) left/28px 100%,
+      linear-gradient(to left, var(--vp-c-bg), var(--vp-c-bg)) right/28px 100%,
+      radial-gradient(
+          farthest-side at 0 50%,
+          color-mix(in srgb, var(--vp-c-text-1) 22%, transparent),
+          transparent
+        )
+        left/12px 100%,
+      radial-gradient(
+          farthest-side at 100% 50%,
+          color-mix(in srgb, var(--vp-c-text-1) 22%, transparent),
+          transparent
+        )
+        right/12px 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .vp-doc table td,
+  .vp-doc table th {
+    white-space: nowrap;
+  }
 }
 
 .vp-doc th,
@@ -125,14 +175,23 @@
   color: var(--vp-c-text-2);
 }
 
-/* 侧边栏：去掉多余的视觉重量 */
+/* 侧边栏：与页面同底（--vp-sidebar-bg-color），只保留一条右侧细线 */
 .VPSidebar {
-  background-color: var(--vp-c-bg) !important;
+  border-right: 1px solid var(--vp-c-divider);
 }
 
 .VPSidebarItem.level-0 > .item > .text {
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+/* 当前页条目：左侧 2px 品牌竖线（默认主题只给 level-2+ 画 indicator） */
+.VPSidebarItem.level-1.is-active > .item > .indicator {
+  background-color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  font-weight: 600;
 }
 
 /* 首页（doc 布局）导览列表 */

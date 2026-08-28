@@ -9,6 +9,8 @@ outline: false
 熠智 AI 是一款电商客服助手。它在你的电脑上运行，接管店铺的日常咨询：AI 按你配置的方案和知识库回复顾客，复杂问题转给人工客服。这份文档教你从零开始把它用起来。
 </p>
 
+[从基本概念开始](/start/concepts)
+
 ## 新手上路
 
 按这个顺序做，大约半小时可以完成首次接待：
@@ -22,16 +24,14 @@ outline: false
 
 ## 常用文档
 
-| 想做的事 | 看这里 |
-| --- | --- |
-| 看支持哪些电商平台 | [支持的平台](/client/platforms) |
-| 让 AI 回答得更准 | [知识库是什么](/knowledge/basics)、[回答不准怎么办](/faq/accuracy) |
-| 配置转人工 | [转人工设置](/solution/transfer) |
-| 固定话术不想让 AI 发挥 | [关键词回复](/solution/keywords) |
-| 弄清点数和扣费 | [点数怎么计算](/billing/points) |
-| 用兑换码 | [兑换码](/billing/redeem) |
-| 在浏览器里管理店铺 | [网页工作台](/workspace/overview) |
-| 软件报错了 | [错误报告](/client/report) |
+- 看支持哪些电商平台：[支持的平台](/client/platforms)
+- 让 AI 回答得更准：[知识库是什么](/knowledge/basics)、[回答不准怎么办](/faq/accuracy)
+- 配置转人工：[转人工设置](/solution/transfer)
+- 固定话术不想让 AI 发挥：[关键词回复](/solution/keywords)
+- 弄清点数和扣费：[点数怎么计算](/billing/points)
+- 用兑换码：[兑换码](/billing/redeem)
+- 在浏览器里管理店铺：[网页工作台](/workspace/overview)
+- 软件报错了：[错误报告](/client/report)
 
 ## 找不到答案？
 
