@@ -4,6 +4,9 @@ export default defineConfig({
   lang: "zh-Hans",
   title: "熠智 AI 帮助中心",
   description: "熠智 AI 电商客服的使用文档：安装、接入店铺、配置 AI 方案、知识库与账单。",
+  // Project Pages serve the site at /aicare-docs/. Switch to "/" when
+  // docs.yizhi.chat is attached as a custom domain, then rebuild.
+  base: "/aicare-docs/",
   cleanUrls: true,
   lastUpdated: true,
 

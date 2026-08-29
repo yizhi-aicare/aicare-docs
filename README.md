@@ -2,7 +2,8 @@
 
 熠智 AI 的公开帮助文档站，基于 VitePress 构建。取代 `aicare-support-website` 中旧的站内文档（`src/content.ts` 的 helpDocs 与 `src/views/GuideView.vue`）。
 
-- 线上目标域名：`https://docs.yizhi.chat`（尚未上线）
+- GitHub Pages：<https://yizhi-aicare.github.io/aicare-docs/>
+- 自定义域名（待 DNS）：`https://docs.yizhi.chat`（上线后把 `docs/.vitepress/config.ts` 的 `base` 改成 `"/"` 并重新部署）
 - 产品官网：<https://www.yizhi.chat/>
 
 ## 本地开发
@@ -47,3 +48,4 @@ docs/
 - `REDIRECTS.md`：旧站内文档地址 → 新地址映射表。
 - `SCREENSHOTS.md`：各页面待补的真实截图清单。
 - `.github/workflows/ci.yml`：PR / push 时运行 `pnpm docs:build`。
+- `.github/workflows/pages.yml`：push `main` 或手动 `workflow_dispatch` 后发布到 GitHub Pages。
