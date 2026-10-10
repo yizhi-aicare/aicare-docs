@@ -91,6 +91,7 @@ export default defineConfig({
           { text: "回答不准怎么办", link: "/faq/accuracy" },
           { text: "平台支持问题", link: "/faq/platforms" },
           { text: "效果与使用建议", link: "/faq/effect" },
+          { text: "转接不能用", link: "/faq/transfer" },
           { text: "遇到故障怎么反馈", link: "/faq/report" }
         ]
       }
